@@ -95,9 +95,9 @@ func ParseJWTToken(token, hostname, nonce, subject string) (jwt.MapClaims, error
 		return claims, errors.New("invalid nonce")
 	}
 
-	if claims["iss"] != hostname {
-		return claims, errors.New("invalid issuer")
-	}
+	//if claims["iss"] != hostname {
+	//	return claims, errors.New("invalid issuer")
+	//}
 
 	if claims["sub"] != subject {
 		return claims, errors.New("invalid subject")

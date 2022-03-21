@@ -12,7 +12,7 @@ import (
 
 // SetSession sets the session cookie in the response
 func SetSession(gc *gin.Context, sessionID string) {
-	secure := true
+	secure := false
 	httpOnly := true
 	hostname := utils.GetHost(gc)
 	host, _ := utils.GetHostParts(hostname)
@@ -24,14 +24,14 @@ func SetSession(gc *gin.Context, sessionID string) {
 	// TODO allow configuring from dashboard
 	year := 60 * 60 * 24 * 365
 
-	gc.SetSameSite(http.SameSiteNoneMode)
+	//gc.SetSameSite(http.SameSiteNoneMode)
 	gc.SetCookie(envstore.EnvStoreObj.GetStringStoreEnvVariable(constants.EnvKeyCookieName)+"_session", sessionID, year, "/", host, secure, httpOnly)
 	gc.SetCookie(envstore.EnvStoreObj.GetStringStoreEnvVariable(constants.EnvKeyCookieName)+"_session_domain", sessionID, year, "/", domain, secure, httpOnly)
 }
 
 // DeleteSession sets session cookies to expire
 func DeleteSession(gc *gin.Context) {
-	secure := true
+	secure := false
 	httpOnly := true
 	hostname := utils.GetHost(gc)
 	host, _ := utils.GetHostParts(hostname)
@@ -40,7 +40,7 @@ func DeleteSession(gc *gin.Context) {
 		domain = "." + domain
 	}
 
-	gc.SetSameSite(http.SameSiteNoneMode)
+	//gc.SetSameSite(http.SameSiteNoneMode)
 	gc.SetCookie(envstore.EnvStoreObj.GetStringStoreEnvVariable(constants.EnvKeyCookieName)+"_session", "", -1, "/", host, secure, httpOnly)
 	gc.SetCookie(envstore.EnvStoreObj.GetStringStoreEnvVariable(constants.EnvKeyCookieName)+"_session_domain", "", -1, "/", domain, secure, httpOnly)
 }

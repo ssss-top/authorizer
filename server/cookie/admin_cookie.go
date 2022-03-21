@@ -11,7 +11,7 @@ import (
 
 // SetAdminCookie sets the admin cookie in the response
 func SetAdminCookie(gc *gin.Context, token string) {
-	secure := true
+	secure := false
 	httpOnly := true
 	hostname := utils.GetHost(gc)
 	host, _ := utils.GetHostParts(hostname)
@@ -37,7 +37,7 @@ func GetAdminCookie(gc *gin.Context) (string, error) {
 
 // DeleteAdminCookie sets the response cookie to empty
 func DeleteAdminCookie(gc *gin.Context) {
-	secure := true
+	secure := false
 	httpOnly := true
 	hostname := utils.GetHost(gc)
 	host, _ := utils.GetHostParts(hostname)
